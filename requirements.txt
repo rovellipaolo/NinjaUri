@@ -1,0 +1,2 @@
+pythonwhois==2.4.3
+tldextract==2.2.2
