@@ -16,17 +16,35 @@ $ git clone https://github.com/rovellipaolo/NinjaUri
 $ cd NinjaUri
 ```
 
-To execute NinjaUri in your local machine, you need `Python 3.5` or higher installed.
+NinjaUri has two ways to be executed, in local environment or in Docker.
 
+### Locally:
+To execute NinjaUri in your local machine, you need `Python 3.5` or higher installed.
 Just launch the following command, which will install all the needed Python dependencies.
 
 ```
 $ make build
 ```
 
+### Docker:
+To execute NinjaUri in Docker, you need `Docker` installed.
+To build the Docker image, launch the following command:
+
+```
+$ docker build -t ninjauri:latest .
+```
+Or alternatively:
+```
+$ make build-docker
+```
+
 
 ## Run:
-Once you've configured it (see the _"Configuration"_ section), to execute NinjaUri in your local machine, launch the following command:
+Once you've configured it (see the _"Configuration"_ section), you can run NinjaUri as follows.
+
+### Locally:
+To execute NinjaUri in your local machine, launch the following command:
+
 ```
 $ ninjauri https://en.wikipedia.org/wiki/URI
 ```
@@ -37,11 +55,32 @@ $ make run uri=https://en.wikipedia.org/wiki/URI
 
 This will produce as output a JSON containing all the retrieved data about the given URI.
 
+### Docker:
+To execute NinjaUri in Docker, launch the following command:
+
+```
+$ docker run --name ninjauri -it --rm ninjauri:latest ninjauri https://en.wikipedia.org/wiki/URI
+```
+Or alternatively:
+```
+$ make run-docker uri=https://en.wikipedia.org/wiki/URI
+```
+
 
 ## Run Tests:
-Once you've configured it (see the _"Configuration"_ section), to run the tests in your local machine, launch the following command:
+Once you've configured it (see the _"Configuration"_ section), you can also run NinjaUri tests as follows.
+
+### Locally:
+To run the tests in your local machine, launch the following command:
 ```
 $ make test
+```
+
+### Docker:
+To run the tests in Docker, launch the following command:
+```
+$ make build-docker
+$ make test-docker
 ```
 
 

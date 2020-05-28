@@ -45,7 +45,7 @@ def main():
 def get_args() -> Namespace:
     parser = ArgumentParser(
         description="examples: \n"
-                    "  >> %(prog)s whatever.input.uri\n"
+                    "  >> %(prog)s target.uri\n"
                     "  >> %(prog)s --version\n"
                     "  >> %(prog)s --help",
         formatter_class=RawTextHelpFormatter
