@@ -6,7 +6,7 @@ RUN useradd -ms /bin/bash ninjauri
 
 # Install dependencies
 RUN apt update && \
-    apt install -qy git python3 python3-pip
+    apt install -qy python3 python3-pip
 
 # Install NinjaUri
 RUN mkdir -p ${NINJAURI_DIR}
