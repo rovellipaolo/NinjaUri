@@ -15,7 +15,7 @@ from pythonwhois.parse import parse_raw_whois
 from pythonwhois.shared import WhoisException
 import sys
 from tldextract import extract
-from typing import Dict, List, Tuple
+from typing import Dict
 from urllib.parse import urlparse
 
 
@@ -80,51 +80,57 @@ def parse_target_uri(raw_uri: str) -> Dict:
             "raw": ""
         }
     }
-    parse_uri_parts(uri)
-    parse_domain(uri)
-    uri["whois"]["raw"], uri["whois"]["servers"] = get_whois(uri["domain"])
-    root_server = get_whois_root_server(uri["domain"])
-    if len(uri["whois"]["servers"]) > 0 and uri["whois"]["servers"][0] != root_server:
-        uri["whois"]["servers"].insert(0, root_server)
+    parts = get_uri_parts(uri["raw"])
+    uri.update(parts)
+    domain = get_domain(uri["hostname"])
+    uri.update(domain)
+    uri["whois"] = get_whois(uri["domain"])
     parse_whois(uri)
     return uri
 
 
-def parse_uri_parts(uri: Dict):
-    logger.debug("Parsing URI parts for '%s'...", uri["raw"])
-    info = urlparse(uri["raw"])
+def get_uri_parts(raw_uri: str) -> Dict:
+    logger.debug("Parsing URI parts for '%s'...", raw_uri)
+    info = urlparse(raw_uri)
     logger.debug("URI parts: %s", info)
-    uri["hostname"] = info.netloc if info.netloc != "" else uri["raw"]
-    uri["protocol"] = info.scheme
-    uri["path"] = info.path
-    uri["query"] = info.query
-    uri["port"] = str(info.port) if info.port is not None else ""
+    return {
+        "hostname": info.netloc if info.netloc != "" else raw_uri,
+        "protocol": info.scheme,
+        "path": info.path,
+        "query": info.query,
+        "port": str(info.port) if info.port is not None else ""
+    }
 
 
-def parse_domain(uri: Dict):
-    logger.debug("Parsing domain info for '%s'...", uri["hostname"])
-    info = extract(uri["hostname"])
+def get_domain(hostname: str):
+    logger.debug("Parsing domain info for '%s'...", hostname)
+    info = extract(hostname)
     logger.debug("Domain info: %s", info)
-    uri["tld"] = info.suffix
-    uri["sld"] = info.domain
-    uri["domain"] = info.domain if info.suffix == "" else info.domain + "." + info.suffix
-    uri["subdomain"] = info.subdomain
+    return {
+        "tld": info.suffix,
+        "sld": info.domain,
+        "domain": info.domain if info.suffix == "" else info.domain + "." + info.suffix,
+        "subdomain": info.subdomain
+    }
 
 
-def get_whois_root_server(domain: str) -> str:
-    logger.debug("Retrieving Whois root server for '%s'...", domain)
-    server = get_root_server(domain)
-    logger.debug("Whois root server: %s", server)
-    return server
-
-
-def get_whois(domain: str) -> Tuple[str, List[str]]:
+def get_whois(domain: str) -> Dict:
     logger.debug("Retrieving Whois info for '%s'...", domain)
-    whois, servers = get_whois_raw(domain, with_server_list=True)
-    whois = whois[0] if len(whois) > 0 else ""
-    logger.debug("Whois raw info:\n%s", whois)
-    logger.debug("Whois servers: %s", servers)
-    return whois, servers
+    raw_whois, servers = get_whois_raw(domain, with_server_list=True)
+    whois = {
+        "raw": raw_whois[0] if len(raw_whois) > 0 else "",
+        "servers": servers
+    }
+    logger.debug("Whois raw info:\n%s", whois["raw"])
+    logger.debug("Whois servers: %s", whois["servers"])
+
+    logger.debug("Retrieving Whois root server for '%s'...", domain)
+    root_server = get_root_server(domain)
+    logger.debug("Whois root server: %s", root_server)
+    if len(whois["servers"]) > 0 and whois["servers"][0] != root_server:
+        whois["servers"].insert(0, root_server)
+
+    return whois
 
 
 def parse_whois(uri: Dict):
