@@ -32,4 +32,4 @@ test:
 
 .PHONY: test-docker
 test-docker:
-	@docker run --name ${DOCKER_IMAGE} --rm ${DOCKER_IMAGE}:${DOCKER_TAG} python3 -m unittest
+	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri ${DOCKER_IMAGE}:${DOCKER_TAG} python3 -m unittest
