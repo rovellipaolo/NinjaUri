@@ -35,7 +35,7 @@ def main():
         logger.setLevel(logging.DEBUG)
     try:
         logger.debug("Reading target URI '%s'...", args.target)
-        uri = parse_target_uri(args.target)
+        uri = parse_uri(args.target)
     except (ValueError, WhoisException) as e:
         logger.error("Cannot parse target URI: %s", e)
         sys.exit(1)
@@ -73,7 +73,7 @@ def get_args() -> Namespace:
     return parser.parse_args()
 
 
-def parse_target_uri(raw_uri: str) -> Dict:
+def parse_uri(raw_uri: str) -> Dict:
     uri = {
         "raw": raw_uri,
         "whois": {
