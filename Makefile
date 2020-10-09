@@ -1,14 +1,19 @@
 DOCKER_IMAGE := ninjauri
 DOCKER_TAG := latest
 PWD := $(shell pwd)
-ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+NINJAURI_HOME := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 
 # Build:
 .PHONY: build
+install: build
 build:
 	@pip3 install -r requirements.txt
-	sudo ln -s $(ROOT_DIR)/ninjauri.py /usr/local/bin/ninjauri
+	sudo ln -s $(NINJAURI_HOME)/ninjauri.py /usr/local/bin/ninjauri
+
+.PHONY: uninstall
+uninstall:
+	sudo unlink /usr/local/bin/ninjauri
 
 .PHONY: build-docker
 build-docker:

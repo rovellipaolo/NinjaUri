@@ -16,6 +16,7 @@ COPY tests/ ${NINJAURI_HOME}/tests/
 
 RUN pip3 install -r ${NINJAURI_HOME}/requirements.txt
 RUN chown -R ninjauri:ninjauri /usr/local/lib/python3.5/site-packages/tldextract
+RUN ln -s ${NINJAURI_HOME}/ninjauri.py /usr/local/bin/ninjauri
 
 COPY ninjauri.sh ${NINJAURI_HOME}
 
@@ -24,4 +25,4 @@ WORKDIR /home/ninjauri
 
 # Run NinjaUri
 ENTRYPOINT ["/opt/NinjaUri/ninjauri.sh"]
-CMD ["ninjauri.py", "-h"]
+CMD ["ninjauri", "-h"]
