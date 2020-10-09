@@ -42,37 +42,6 @@ def main():
     print_uri_info(uri)
 
 
-def get_args() -> Namespace:
-    parser = ArgumentParser(
-        description="examples: \n"
-                    "  >> %(prog)s target.uri\n"
-                    "  >> %(prog)s --version\n"
-                    "  >> %(prog)s --help",
-        formatter_class=RawTextHelpFormatter
-    )
-    parser.add_argument(
-        "target",
-        metavar="TARGET_URI",
-        type=str,
-        help="The targeted URI to analyse."
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        action="store_true",
-        dest="verbose",
-        help="Show verbose logs."
-    )
-    parser.add_argument(
-        "-V",
-        "--version",
-        action="version",
-        version="NinjaUri " + VERSION,
-        help="Show version information."
-    )
-    return parser.parse_args()
-
-
 def parse_uri(raw_uri: str) -> Dict:
     uri = {
         "raw": raw_uri,
@@ -189,6 +158,37 @@ def parse_whois_status(uri: Dict):
 def print_uri_info(uri: Dict):
     uri_info = json.dumps(uri, sort_keys=True, ensure_ascii=False, default=str, indent=4)
     print(uri_info)
+
+
+def get_args() -> Namespace:
+    parser = ArgumentParser(
+        description="examples: \n"
+                    "  >> %(prog)s target.uri\n"
+                    "  >> %(prog)s --version\n"
+                    "  >> %(prog)s --help",
+        formatter_class=RawTextHelpFormatter
+    )
+    parser.add_argument(
+        "target",
+        metavar="TARGET_URI",
+        type=str,
+        help="The targeted URI to analyse."
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        dest="verbose",
+        help="Show verbose logs."
+    )
+    parser.add_argument(
+        "-V",
+        "--version",
+        action="version",
+        version="NinjaUri " + VERSION,
+        help="Show version information."
+    )
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
