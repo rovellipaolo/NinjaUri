@@ -28,7 +28,7 @@ class TestMain(unittest.TestCase):
 
         main()
 
-        mock_parse_args.assert_called_once()
+        mock_parse_args.assert_called_once_with()
         mock_parse_uri.assert_called_once_with(self.ANY_RAW_URI)
         mock_print_uri_info.assert_called_once_with(self.ANY_URI)
 
@@ -42,7 +42,7 @@ class TestMain(unittest.TestCase):
 
         main()
 
-        mock_parse_args.assert_called_once()
+        mock_parse_args.assert_called_once_with()
         mock_parse_uri.assert_called_once_with(self.ANY_RAW_URI)
         mock_print_uri_info.assert_not_called()
         mock_sys_exit.assert_called_once_with(1)
@@ -57,7 +57,7 @@ class TestMain(unittest.TestCase):
 
         main()
 
-        mock_parse_args.assert_called_once()
+        mock_parse_args.assert_called_once_with()
         mock_parse_uri.assert_called_once_with(self.ANY_RAW_URI)
         mock_print_uri_info.assert_not_called()
         mock_sys_exit.assert_called_once_with(1)
