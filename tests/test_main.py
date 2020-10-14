@@ -1,8 +1,9 @@
 from argparse import Namespace
+from pythonwhois.shared import WhoisException
 import unittest
 from unittest.mock import patch
 
-from ninjauri import main, WhoisException
+from ninjauri import main
 
 
 class TestMain(unittest.TestCase):
@@ -13,10 +14,10 @@ class TestMain(unittest.TestCase):
     }
 
     def any_args(self) -> Namespace:
-        any_args = Namespace()
-        any_args.target = self.ANY_RAW_URI
-        any_args.verbose = False
-        return any_args
+        args = Namespace()
+        args.target = self.ANY_RAW_URI
+        args.verbose = False
+        return args
 
     @patch('ninjauri.print_uri_info')
     @patch('ninjauri.parse_uri')
