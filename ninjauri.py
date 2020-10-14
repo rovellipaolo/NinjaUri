@@ -36,10 +36,10 @@ def main():
     try:
         logger.debug("Reading target URI '%s'...", args.target)
         uri = parse_uri(args.target)
+        print_uri_info(uri)
     except (ValueError, WhoisException) as e:
         logger.error("Cannot parse target URI: %s", e)
         sys.exit(1)
-    print_uri_info(uri)
 
 
 def parse_uri(raw_uri: str) -> Dict:
