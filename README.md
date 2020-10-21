@@ -67,10 +67,10 @@ $ make run-docker uri=https://en.wikipedia.org/wiki/URI
 ```
 
 
-## Run Checkstyle and Tests:
+## Run checkstyle:
 Once you've configured it (see the _"Configuration"_ section), to run the checkstyle execute:
 ```
-$ pylint tregression.py
+$ pylint ninjauri.py
 ```
 Or alternatively:
 ```
