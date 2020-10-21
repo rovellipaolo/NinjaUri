@@ -1,15 +1,10 @@
-FROM python:3.8-slim-buster
-
-# Install dependencies
-
-RUN apt update \
-    && apt install -qy python3 python3-pip
+FROM python:3.8-alpine
 
 # Install NinjaUri
 
 ENV NINJAURI_HOME=/opt/NinjaUri
 
-RUN useradd -ms /bin/bash ninjauri \
+RUN adduser -Ds /bin/sh ninjauri \
     && mkdir -p ${NINJAURI_HOME}
 
 COPY requirements.txt ${NINJAURI_HOME}
