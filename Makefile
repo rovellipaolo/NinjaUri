@@ -38,3 +38,7 @@ test:
 .PHONY: test-docker
 test-docker:
 	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri ${DOCKER_IMAGE}:${DOCKER_TAG} python3 -m unittest
+
+.PHONY: checkstyle
+checkstyle:
+	pylint ninjauri.py

@@ -10,13 +10,13 @@ A simple data retrieval tool for URIs.
 from argparse import ArgumentParser, Namespace, RawTextHelpFormatter
 import json
 import logging
+import sys
+from typing import Dict
+from urllib.parse import urlparse
 from pythonwhois.net import get_root_server, get_whois_raw
 from pythonwhois.parse import parse_raw_whois
 from pythonwhois.shared import WhoisException
-import sys
 from tldextract import extract
-from typing import Dict
-from urllib.parse import urlparse
 
 
 VERSION = "1.0"
@@ -34,11 +34,11 @@ def main():
     if args.verbose:
         logger.setLevel(logging.DEBUG)
     try:
-        logger.debug("Reading target URI '%s'...", args.target)
+        logger.debug(f"Reading target URI '{args.target}'...")
         uri = parse_uri(args.target)
         print_uri_info(uri)
-    except (ValueError, WhoisException) as e:
-        logger.error("Cannot parse target URI: %s", e)
+    except (ValueError, WhoisException) as error:
+        logger.error(f"Cannot parse target URI: {error}")
         sys.exit(1)
 
 
@@ -59,9 +59,9 @@ def parse_uri(raw_uri: str) -> Dict:
 
 
 def get_uri_parts(raw_uri: str) -> Dict:
-    logger.debug("Parsing URI parts for '%s'...", raw_uri)
+    logger.debug(f"Parsing URI parts for '{raw_uri}'...")
     info = urlparse(raw_uri)
-    logger.debug("URI parts: %s", info)
+    logger.debug(f"URI parts: {info}")
     return {
         "hostname": info.netloc if info.netloc != "" else raw_uri,
         "protocol": info.scheme,
@@ -72,9 +72,9 @@ def get_uri_parts(raw_uri: str) -> Dict:
 
 
 def get_domain(hostname: str):
-    logger.debug("Parsing domain info for '%s'...", hostname)
+    logger.debug(f"Parsing domain info for '{hostname}'...")
     info = extract(hostname)
-    logger.debug("Domain info: %s", info)
+    logger.debug(f"Domain info: {info}")
     return {
         "tld": info.suffix,
         "sld": info.domain,
@@ -84,18 +84,18 @@ def get_domain(hostname: str):
 
 
 def get_whois(domain: str) -> Dict:
-    logger.debug("Retrieving Whois info for '%s'...", domain)
+    logger.debug(f"Retrieving Whois info for '{domain}'...")
     raw_whois, servers = get_whois_raw(domain, with_server_list=True)
     whois = {
         "raw": raw_whois[0] if len(raw_whois) > 0 else "",
         "servers": servers
     }
-    logger.debug("Whois raw info:\n%s", whois["raw"])
-    logger.debug("Whois servers: %s", whois["servers"])
+    logger.debug(f'Whois raw info:\n{whois["raw"]}')
+    logger.debug(f'Whois servers: {whois["servers"]}')
 
-    logger.debug("Retrieving Whois root server for '%s'...", domain)
+    logger.debug(f"Retrieving Whois root server for '{domain}'...")
     root_server = get_root_server(domain)
-    logger.debug("Whois root server: %s", root_server)
+    logger.debug(f"Whois root server: {root_server}")
     if len(whois["servers"]) > 0 and whois["servers"][0] != root_server:
         whois["servers"].insert(0, root_server)
 
@@ -110,7 +110,7 @@ def parse_whois(uri: Dict):
         never_query_handles=False,
         handle_server=uri["whois"]["servers"][-1]
     )
-    logger.debug("Whois info:\n%s", whois)
+    logger.debug(f"Whois info:\n{whois}")
     uri["domain_id"] = whois["id"][0] if "id" in whois and len(whois["id"]) > 0 else ""
     uri["status"] = whois["status"] if "status" in whois else []
     if "registrar" in whois is not None and len(whois["registrar"]) > 0:

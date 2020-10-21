@@ -19,7 +19,7 @@ $ cd NinjaUri
 NinjaUri has two ways to be executed, in local environment or in Docker.
 
 ### Locally:
-To execute NinjaUri in your local machine, you need `Python 3.5` or higher installed.
+To execute NinjaUri in your local machine, you need `Python 3.6` or higher installed.
 Just launch the following command, which will install all the needed Python dependencies.
 
 ```
@@ -67,7 +67,19 @@ $ make run-docker uri=https://en.wikipedia.org/wiki/URI
 ```
 
 
-## Run Tests:
+## Run Checkstyle and Tests:
+Once you've configured it (see the _"Configuration"_ section), to run the checkstyle execute:
+```
+$ pylint tregression.py
+```
+Or alternatively:
+```
+$ make checkstyle
+```
+**NOTE:** This is using [`pylint`](https://github.com/PyCQA/pylint) under-the-hood.
+
+
+## Run tests:
 Once you've configured it (see the _"Configuration"_ section), you can also run NinjaUri tests as follows.
 
 ### Locally:
