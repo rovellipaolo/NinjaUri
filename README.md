@@ -5,7 +5,7 @@ NinjaUri is a simple data retrieval tool for URIs.
 
 ## Overview:
 
-NinjaUri uses `pythonwhois` (https://github.com/joepie91/python-whois) and `tldextract` (https://github.com/john-kurkowski/tldextract) to extract a series of information from a given URI.
+NinjaUri uses `pythonwhois-alt` (https://github.com/kilgoretrout1985/pythonwhois-alt) and `tldextract` (https://github.com/john-kurkowski/tldextract) to extract a series of information from a given URI.
 
 
 ## Installation:

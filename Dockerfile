@@ -1,4 +1,4 @@
-FROM python:3.6-slim-stretch
+FROM python:3.8-slim-buster
 
 # Install dependencies
 RUN apt update && \
@@ -16,7 +16,7 @@ COPY ninjauri.sh ${NINJAURI_HOME}
 COPY tests/ ${NINJAURI_HOME}/tests/
 
 RUN pip3 install -r ${NINJAURI_HOME}/requirements.txt && \
-    chown -R ninjauri:ninjauri /usr/local/lib/python3.6/site-packages/tldextract && \
+    chown -R ninjauri:ninjauri /usr/local/lib/python3.8/site-packages/tldextract && \
     ln -s ${NINJAURI_HOME}/ninjauri.py /usr/local/bin/ninjauri
 
 USER ninjauri
