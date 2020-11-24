@@ -9,15 +9,29 @@ NINJAURI_HOME := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 install: build
 build:
 	@pip3 install -r requirements.txt
+
+.PHONY: build-docker
+build-docker:
+	@docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+
+
+# Install:
+.PHONY: install
+install:
 	sudo ln -s $(NINJAURI_HOME)/ninjauri.py /usr/local/bin/ninjauri
 
 .PHONY: uninstall
 uninstall:
 	sudo unlink /usr/local/bin/ninjauri
 
-.PHONY: build-docker
-build-docker:
-	@docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+.PHONY: install-githooks
+install-githooks:
+	@pip3 install pre-commit
+	pre-commit install
+
+.PHONY: uninstall-githooks
+uninstall-githooks:
+	pre-commit uninstall
 
 
 # Run:

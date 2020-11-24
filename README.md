@@ -20,10 +20,11 @@ NinjaUri has two ways to be executed, in local environment or in Docker.
 
 ### Locally:
 To execute NinjaUri in your local machine, you need `Python 3.6` or higher installed.
-Just launch the following command, which will install all the needed Python dependencies.
+Just launch the following commands, which will install all the needed Python dependencies and add a `ninjauri` symlink to `/usr/local/bin/`.
 
 ```
 $ make build
+$ make install
 ```
 
 ### Docker:
@@ -77,6 +78,11 @@ Or alternatively:
 $ make checkstyle
 ```
 **NOTE:** This is using [`pylint`](https://github.com/PyCQA/pylint) under-the-hood.
+
+You can also run the checkstyle automatically at every git commit by launching the following command:
+```
+$ make install-githooks
+```
 
 
 ## Run tests:
