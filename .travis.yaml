@@ -1,0 +1,17 @@
+language: python
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8"
+  - "nightly"
+install:
+  - pip install -r requirements.txt
+  - pip install coverage
+  - pip install coveralls
+script:
+  - pylint ninjauri.py
+  - python -m unittest
+  - coverage run --include=ninjauri.py -m unittest
+after_success:
+  - coveralls

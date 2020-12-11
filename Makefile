@@ -49,6 +49,10 @@ run-docker:
 test:
 	@python3 -m unittest
 
+.PHONY: test-coverage
+test-coverage:
+	coverage run --include=ninjauri.py -m unittest
+
 .PHONY: test-docker
 test-docker:
 	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri ${DOCKER_IMAGE}:${DOCKER_TAG} python3 -m unittest
