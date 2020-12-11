@@ -3,6 +3,12 @@ NinjaUri
 
 NinjaUri is a simple data retrieval tool for URIs.
 
+[![Build Status: TravisCI](https://travis-ci.org/rovellipaolo/NinjaUri.svg?branch=master)](https://travis-ci.org/rovellipaolo/NinjaUri)
+[![Test Coverage: Coveralls](https://coveralls.io/repos/github/rovellipaolo/NinjaUri/badge.svg?branch=master)](https://coveralls.io/github/rovellipaolo/NinjaUri?branch=master)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+![NinjaUri](docs/images/ninjauri.gif "Screencast of NinjaUri")
+
 ## Overview:
 
 NinjaUri uses `pythonwhois-alt` (https://github.com/kilgoretrout1985/pythonwhois-alt) and `tldextract` (https://github.com/john-kurkowski/tldextract) to extract a series of information from a given URI.
