@@ -1,3 +1,4 @@
-pylint==2.6.0
+coverage
+pylint
 pythonwhois-alt==2.4.4
 tldextract==2.2.2
