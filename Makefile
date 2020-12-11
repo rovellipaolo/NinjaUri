@@ -51,7 +51,8 @@ test:
 
 .PHONY: test-coverage
 test-coverage:
-	coverage run --include=ninjauri.py -m unittest
+	coverage run --source=. -m unittest
+	coverage report
 
 .PHONY: test-docker
 test-docker:

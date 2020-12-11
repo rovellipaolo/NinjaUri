@@ -104,6 +104,11 @@ Or alternatively:
 $ make test
 ```
 
+You can also run the tests with coverage by launching the following command:
+```
+$ make test-coverage
+```
+
 ### Docker:
 To run the tests in Docker, launch the following command:
 ```

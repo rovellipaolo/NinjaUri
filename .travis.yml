@@ -8,7 +8,6 @@ install:
   - pip install coveralls
 script:
   - pylint ninjauri.py
-  - python -m unittest
-  - coverage run --include=ninjauri.py -m unittest
+  - coverage run --source=. -m unittest
 after_success:
   - coveralls
