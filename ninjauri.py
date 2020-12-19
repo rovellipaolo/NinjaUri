@@ -39,7 +39,8 @@ def main():
         print_uri_info(uri)
     except (ValueError, WhoisException) as error:
         logger.error(f"Cannot parse target URI: {error}")
-        sys.exit(1)
+        return 1
+    return 0
 
 
 def parse_uri(raw_uri: str) -> Dict:

@@ -26,41 +26,40 @@ class TestMain(unittest.TestCase):
         mock_parse_args.return_value = self.any_args()
         mock_parse_uri.return_value = self.ANY_URI
 
-        main()
+        result = main()
 
         mock_parse_args.assert_called_once()
         mock_parse_uri.assert_called_once_with(self.ANY_RAW_URI)
         mock_print_uri_info.assert_called_once_with(self.ANY_URI)
+        self.assertEqual(0, result)
 
-    @patch('sys.exit')
     @patch('ninjauri.print_uri_info')
     @patch('ninjauri.parse_uri')
     @patch('argparse.ArgumentParser.parse_args')
-    def test_main_when_uri_parsing_fails(self, mock_parse_args, mock_parse_uri, mock_print_uri_info, mock_sys_exit):
+    def test_main_when_uri_parsing_fails(self, mock_parse_args, mock_parse_uri, mock_print_uri_info):
         mock_parse_args.return_value = self.any_args()
         mock_parse_uri.side_effect = ValueError()
 
-        main()
+        result = main()
 
         mock_parse_args.assert_called_once()
         mock_parse_uri.assert_called_once_with(self.ANY_RAW_URI)
         mock_print_uri_info.assert_not_called()
-        mock_sys_exit.assert_called_once_with(1)
+        self.assertEqual(1, result)
 
-    @patch('sys.exit')
     @patch('ninjauri.print_uri_info')
     @patch('ninjauri.parse_uri')
     @patch('argparse.ArgumentParser.parse_args')
-    def test_main_when_whois_retrieval_fails(self, mock_parse_args, mock_parse_uri, mock_print_uri_info, mock_sys_exit):
+    def test_main_when_whois_retrieval_fails(self, mock_parse_args, mock_parse_uri, mock_print_uri_info):
         mock_parse_args.return_value = self.any_args()
         mock_parse_uri.side_effect = WhoisException()
 
-        main()
+        result = main()
 
         mock_parse_args.assert_called_once()
         mock_parse_uri.assert_called_once_with(self.ANY_RAW_URI)
         mock_print_uri_info.assert_not_called()
-        mock_sys_exit.assert_called_once_with(1)
+        self.assertEqual(1, result)
 
 
 if __name__ == '__main__':
