@@ -6,7 +6,6 @@ NINJAURI_HOME := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 # Build:
 .PHONY: build
-install: build
 build:
 	@pip3 install -r requirements.txt
 
