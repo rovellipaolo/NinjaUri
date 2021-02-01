@@ -76,7 +76,10 @@ $ make run-docker uri=https://en.wikipedia.org/wiki/URI
 
 
 ## Run checkstyle:
-Once you've configured it (see the _"Configuration"_ section), to run the checkstyle execute:
+Once you've configured it (see the _"Configuration"_ section), you can also run NinjaUri checkstyle as follows.
+
+### Locally:
+To run the checkstyle in your local machine, launch the following command:
 ```
 $ pylint ninjauri.py
 ```
@@ -89,6 +92,18 @@ $ make checkstyle
 You can also run the checkstyle automatically at every git commit by launching the following command:
 ```
 $ make install-githooks
+```
+
+### Docker:
+To run the checkstyle in Docker, launch the following commands:
+```
+$ docker build -t ninjauri:latest .
+$ docker run --name ninjauri --rm -w /opt/NinjaUri ninjauri:latest pylint ninjauri.py
+```
+Or alternatively:
+```
+$ make build-docker
+$ make checkstyle-docker
 ```
 
 
@@ -111,7 +126,7 @@ $ make test-coverage
 ```
 
 ### Docker:
-To run the tests in Docker, launch the following command:
+To run the tests in Docker, launch the following commands:
 ```
 $ docker build -t ninjauri:latest .
 $ docker run --name ninjauri --rm -w /opt/NinjaUri ninjauri:latest python3 -m unittest

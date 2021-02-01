@@ -60,3 +60,7 @@ test-docker:
 .PHONY: checkstyle
 checkstyle:
 	pylint ninjauri.py
+
+.PHONY: checkstyle-docker
+checkstyle-docker:
+	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri ${DOCKER_IMAGE}:${DOCKER_TAG} pylint ninjauri.py
