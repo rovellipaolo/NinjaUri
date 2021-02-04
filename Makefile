@@ -55,7 +55,7 @@ test-coverage:
 
 .PHONY: test-docker
 test-docker:
-	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri ${DOCKER_IMAGE}:${DOCKER_TAG} python3 -m unittest
+	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri -v ${NINJAURI_HOME}/tests:/opt/NinjaUri/tests ${DOCKER_IMAGE}:${DOCKER_TAG} python3 -m unittest
 
 .PHONY: checkstyle
 checkstyle:
@@ -63,4 +63,4 @@ checkstyle:
 
 .PHONY: checkstyle-docker
 checkstyle-docker:
-	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri ${DOCKER_IMAGE}:${DOCKER_TAG} pylint ninjauri.py
+	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri -v ${NINJAURI_HOME}/.pylintrc:/opt/NinjaUri/.pylintrc ${DOCKER_IMAGE}:${DOCKER_TAG} pylint ninjauri.py

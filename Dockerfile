@@ -10,8 +10,6 @@ RUN adduser -Ds /bin/sh ninjauri \
 COPY requirements.txt ${NINJAURI_HOME}
 COPY ninjauri.py ${NINJAURI_HOME}
 COPY ninjauri.sh ${NINJAURI_HOME}
-COPY tests/ ${NINJAURI_HOME}/tests/
-COPY .pylintrc ${NINJAURI_HOME}
 
 RUN pip3 install -r ${NINJAURI_HOME}/requirements.txt \
     && chown -R ninjauri:ninjauri /usr/local/lib/python3.8/site-packages/tldextract \
