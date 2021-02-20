@@ -40,7 +40,7 @@ run:
 
 .PHONY: run-docker
 run-docker:
-	@docker run --name ${DOCKER_IMAGE} -it --rm ${DOCKER_IMAGE}:${DOCKER_TAG} ninjauri $(uri)
+	@docker run --name ${DOCKER_IMAGE} -it --rm ${DOCKER_IMAGE}:${DOCKER_TAG} ninjauri $(uri) --json
 
 
 # Test:

@@ -11,7 +11,7 @@ from argparse import ArgumentParser, Namespace, RawTextHelpFormatter
 import json
 import logging
 import sys
-from typing import Dict
+from typing import Any, Dict, Optional
 from urllib.parse import urlparse
 from pythonwhois.net import get_root_server, get_whois_raw
 from pythonwhois.parse import parse_raw_whois
@@ -19,7 +19,7 @@ from pythonwhois.shared import WhoisException
 from tldextract import extract
 
 
-VERSION = "1.0"
+VERSION = "2.0"
 
 
 logging.basicConfig(
@@ -36,7 +36,7 @@ def main():
     try:
         logger.debug(f"Reading target URI '{args.target}'...")
         uri = parse_uri(args.target)
-        print_uri_info(uri)
+        print_uri(uri, as_json=args.json)
     except (ValueError, WhoisException) as error:
         logger.error(f"Cannot parse target URI: {error}")
         return 1
@@ -156,38 +156,77 @@ def parse_whois_status(uri: Dict):
         uri["registered"] = True
 
 
-def print_uri_info(uri: Dict):
-    uri_info = json.dumps(uri, sort_keys=True, ensure_ascii=False, default=str, indent=4)
-    print(uri_info)
+def print_uri(uri: Dict, as_json: bool):
+    if as_json:
+        uri_info = json.dumps(uri, sort_keys=True, ensure_ascii=False, default=str, indent=4)
+        print(uri_info)
+    else:
+        print_uri_info(uri)
+
+
+def print_uri_info(uri: dict, depth: int = 0):
+    for key, value in uri.items():
+        if isinstance(value, dict) and value:
+            print(format_uri_info(key, None, depth))
+            print_uri_info(value, depth + 1)
+        elif isinstance(value, list) and len(value) > 0:
+            print(format_uri_info(key, None, depth))
+            for index, item in enumerate(value):
+                if isinstance(item, dict):
+                    if index > 0:
+                        print("")
+                    print_uri_info(item, depth+1)
+                elif item:
+                    print(format_uri_info(None, item, depth+1))
+        elif key != "raw" and value:
+            print(format_uri_info(key, value, depth))
+
+
+def format_uri_info(key: Optional[str], value: Optional[Any], depth: int = 0):
+    if key is None:
+        output = "{0} {1}".format(("\t" * depth) + "-", value)
+    else:
+        key = ("\t" * depth) + key + ":"
+        if value is None:
+            output = key
+        else:
+            output = "{0:12} {1}".format(key, value)
+    return output
 
 
 def get_args() -> Namespace:
     parser = ArgumentParser(
         description="examples: \n"
                     "  >> %(prog)s target.uri\n"
-                    "  >> %(prog)s --version\n"
-                    "  >> %(prog)s --help",
+                    "  >> %(prog)s target.uri --json",
         formatter_class=RawTextHelpFormatter
     )
     parser.add_argument(
         "target",
         metavar="TARGET_URI",
         type=str,
-        help="The targeted URI to analyse."
+        help="the URI to analyse"
     )
     parser.add_argument(
-        "-v",
+        "-j",
+        "--json",
+        action="store_true",
+        dest="json",
+        help="show the output in JSON format"
+    )
+    parser.add_argument(
+        "-d",
         "--verbose",
         action="store_true",
         dest="verbose",
-        help="Show verbose logs."
+        help="show verbose logs"
     )
     parser.add_argument(
-        "-V",
+        "-v",
         "--version",
         action="version",
         version="NinjaUri " + VERSION,
-        help="Show version information."
+        help="show version"
     )
     return parser.parse_args()
 

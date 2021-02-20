@@ -32,58 +32,24 @@ Just launch the following commands, which will install all the needed Python dep
 ```
 $ make build
 $ make install
+$ ninjauri --help
 ```
 
 ### Docker:
 To execute NinjaUri in Docker, you need `Docker` installed.
-To build the Docker image, launch the following command:
+To build the Docker image, launch the following commands:
 
-```
-$ docker build -t ninjauri:latest .
-```
-Or alternatively:
 ```
 $ make build-docker
-```
-
-
-## Run:
-Once you've configured it (see the _"Configuration"_ section), you can run NinjaUri as follows.
-
-### Locally:
-To execute NinjaUri in your local machine, launch the following command:
-
-```
-$ ninjauri https://en.wikipedia.org/wiki/URI
-```
-Or alternatively:
-```
-$ make run uri=https://en.wikipedia.org/wiki/URI
-```
-
-This will produce as output a JSON containing all the retrieved data about the given URI.
-
-### Docker:
-To execute NinjaUri in Docker, launch the following command:
-
-```
-$ docker run --name ninjauri -it --rm ninjauri:latest ninjauri https://en.wikipedia.org/wiki/URI
-```
-Or alternatively:
-```
-$ make run-docker uri=https://en.wikipedia.org/wiki/URI
+$ docker run --name ninjauri -it --rm ninjauri:latest ninjauri --help
 ```
 
 
 ## Run checkstyle:
-Once you've configured it (see the _"Configuration"_ section), you can also run NinjaUri checkstyle as follows.
+Once you've configured it (see the _"Installation"_ section), you can also run NinjaUri checkstyle as follows.
 
 ### Locally:
 To run the checkstyle in your local machine, launch the following command:
-```
-$ pylint ninjauri.py
-```
-Or alternatively:
 ```
 $ make checkstyle
 ```
@@ -95,27 +61,17 @@ $ make install-githooks
 ```
 
 ### Docker:
-To run the checkstyle in Docker, launch the following commands:
+To run the checkstyle in Docker, launch the following command:
 ```
-$ docker build -t ninjauri:latest .
-$ docker run --name ninjauri --rm -w /opt/NinjaUri ninjauri:latest pylint ninjauri.py
-```
-Or alternatively:
-```
-$ make build-docker
 $ make checkstyle-docker
 ```
 
 
 ## Run tests:
-Once you've configured it (see the _"Configuration"_ section), you can also run NinjaUri tests as follows.
+Once you've configured it (see the _"Installation"_ section), you can also run NinjaUri tests as follows.
 
 ### Locally:
 To run the tests in your local machine, launch the following command:
-```
-$ python3 -m unittest
-```
-Or alternatively:
 ```
 $ make test
 ```
@@ -126,28 +82,53 @@ $ make test-coverage
 ```
 
 ### Docker:
-To run the tests in Docker, launch the following commands:
+To run the tests in Docker, launch the following command:
 ```
-$ docker build -t ninjauri:latest .
-$ docker run --name ninjauri --rm -w /opt/NinjaUri ninjauri:latest python3 -m unittest
-```
-Or alternatively:
-```
-$ make build-docker
 $ make test-docker
 ```
 
 
-## Licence:
+## Usage
 
-NinjaUri is licensed under the GNU General Public License v3.0 (http://www.gnu.org/licenses/gpl-3.0.html).
+The following are examples of running NinjaUri against a sample URI.
 
-
-## Sample JSON output
-
-The following is the output of NinjaUri run against a sample URI:
+### Show URI summary
 ```
 $ ninjauri https://en.wikipedia.org/wiki/URI
+```
+```
+whois:
+	servers:
+		- whois.markmonitor.com
+		- whois.pir.org
+	emails:
+		- abusecomplaints@markmonitor.com
+hostname:    en.wikipedia.org
+protocol:    https
+path:        /wiki/URI
+tld:         org
+sld:         wikipedia
+domain:      wikipedia.org
+subdomain:   en
+domain_id:   D51687756-LROR
+status:
+	- clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited
+	- clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+	- clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited
+registrar:   MarkMonitor Inc.
+create_time: 2001-01-13 00:12:14
+update_time: 2020-10-15 22:29:57
+expire_time: 2023-01-13 00:12:14
+nameservers:
+	- ns0.wikimedia.org
+	- ns1.wikimedia.org
+	- ns2.wikimedia.org
+registered:  True
+```
+
+### Show URI information in JSON format
+```
+$ ninjauri https://en.wikipedia.org/wiki/URI --json
 ```
 ```json
 {
@@ -181,12 +162,12 @@ $ ninjauri https://en.wikipedia.org/wiki/URI
     "subdomain": "en",
     "technical_contacts": {},
     "tld": "org",
-    "update_time": "2015-12-12 10:16:19",
+    "update_time": "2020-10-15 22:29:57",
     "whois": {
         "emails": [
             "abusecomplaints@markmonitor.com"
         ],
-        "raw": "Domain Name: WIKIPEDIA.ORG\r\nRegistry Domain ID: D51687756-LROR\r\nRegistrar WHOIS Server: whois.markmonitor.com\r\nRegistrar URL: http://www.markmonitor.com\r\nUpdated Date: 2015-12-12T10:16:19Z\r\nCreation Date: 2001-01-13T00:12:14Z\r\nRegistry Expiry Date: 2023-01-13T00:12:14Z\r\nRegistrar Registration Expiration Date:\r\nRegistrar: MarkMonitor Inc.\r\nRegistrar IANA ID: 292\r\nRegistrar Abuse Contact Email: abusecomplaints@markmonitor.com\r\nRegistrar Abuse Contact Phone: +1.2083895740\r\nReseller:\r\nDomain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\r\nDomain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r\nDomain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\r\nRegistrant Organization: Wikimedia Foundation, Inc.\r\nRegistrant State/Province: CA\r\nRegistrant Country: US\r\nName Server: NS0.WIKIMEDIA.ORG\r\nName Server: NS1.WIKIMEDIA.ORG\r\nName Server: NS2.WIKIMEDIA.ORG\r\nDNSSEC: unsigned\r\nURL of the ICANN Whois Inaccuracy Complaint Form https://www.icann.org/wicf/)\r\n>>> Last update of WHOIS database: 2020-05-28T14:27:51Z <<<\r\n\r\nFor more information on Whois status codes, please visit https://icann.org/epp\r\n\r\nAccess to Public Interest Registry WHOIS information is provided to assist persons in determining the contents of a domain name registration record in the Public Interest Registry registry database. The data in this record is provided by Public Interest Registry for informational purposes only, and Public Interest Registry does not guarantee its accuracy. This service is intended only for query-based access. You agree that you will use this data only for lawful purposes and that, under no circumstances will you use this data to (a) allow, enable, or otherwise support the transmission by e-mail, telephone, or facsimile of mass unsolicited, commercial advertising or solicitations to entities other than the data recipient's own existing customers; or (b) enable high volume, automated, electronic processes that send queries or data to the systems of Registry Operator, a Registrar, or Afilias except as reasonably necessary to register domain names or modify existing registrations. All rights reserved. Public Interest Registry reserves the right to modify these terms at any time. By submitting this query, you agree to abide by this policy.\n\nThe Registrar of Record identified in this output may have an RDDS service that can be queried for additional information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.\r\n",
+        "raw": "Domain Name: WIKIPEDIA.ORG\r\nRegistry Domain ID: D51687756-LROR\r\nRegistrar WHOIS Server: whois.markmonitor.com\r\nRegistrar URL: http://www.markmonitor.com\r\nUpdated Date: 2020-10-15T22:29:57Z\r\nCreation Date: 2001-01-13T00:12:14Z\r\nRegistry Expiry Date: 2023-01-13T00:12:14Z\r\nRegistrar Registration Expiration Date:\r\nRegistrar: MarkMonitor Inc.\r\nRegistrar IANA ID: 292\r\nRegistrar Abuse Contact Email: abusecomplaints@markmonitor.com\r\nRegistrar Abuse Contact Phone: +1.2083895740\r\nReseller:\r\nDomain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\r\nDomain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r\nDomain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\r\nRegistrant Organization: Wikimedia Foundation, Inc.\r\nRegistrant State/Province: CA\r\nRegistrant Country: US\r\nName Server: NS0.WIKIMEDIA.ORG\r\nName Server: NS1.WIKIMEDIA.ORG\r\nName Server: NS2.WIKIMEDIA.ORG\r\nDNSSEC: unsigned\r\nURL of the ICANN Whois Inaccuracy Complaint Form https://www.icann.org/wicf/)\r\n>>> Last update of WHOIS database: 2021-02-20T23:17:07Z <<<\r\n\r\nFor more information on Whois status codes, please visit https://icann.org/epp\r\n\r\nAccess to Public Interest Registry WHOIS information is provided to assist persons in determining the contents of a domain name registration record in the Public Interest Registry registry database. The data in this record is provided by Public Interest Registry for informational purposes only, and Public Interest Registry does not guarantee its accuracy. This service is intended only for query-based access. You agree that you will use this data only for lawful purposes and that, under no circumstances will you use this data to (a) allow, enable, or otherwise support the transmission by e-mail, telephone, or facsimile of mass unsolicited, commercial advertising or solicitations to entities other than the data recipient's own existing customers; or (b) enable high volume, automated, electronic processes that send queries or data to the systems of Registry Operator, a Registrar, or Afilias except as reasonably necessary to register domain names or modify existing registrations. All rights reserved. Public Interest Registry reserves the right to modify these terms at any time. By submitting this query, you agree to abide by this policy.\n\nThe Registrar of Record identified in this output may have an RDDS service that can be queried for additional information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.\r\n",
         "servers": [
             "whois.markmonitor.com",
             "whois.pir.org"
@@ -194,3 +175,8 @@ $ ninjauri https://en.wikipedia.org/wiki/URI
     }
 }
 ```
+
+
+## Licence:
+
+NinjaUri is licensed under the GNU General Public License v3.0 (http://www.gnu.org/licenses/gpl-3.0.html).
