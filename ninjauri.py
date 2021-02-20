@@ -182,7 +182,7 @@ def print_uri_info(uri: dict, depth: int = 0):
             print(format_uri_info(key, value, depth))
 
 
-def format_uri_info(key: Optional[str], value: Optional[Any], depth: int = 0):
+def format_uri_info(key: Optional[str], value: Optional[Any], depth: int = 0) -> str:
     if key is None:
         output = "{0} {1}".format(("\t" * depth) + "-", value)
     else:
