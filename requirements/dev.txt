@@ -1,4 +1,4 @@
 -r prod.txt
-coverage
+coverage==5.3
 parameterized==0.8.1
-pylint
+pylint==2.6.0
