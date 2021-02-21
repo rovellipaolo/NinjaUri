@@ -10,12 +10,16 @@ NinjaUri is a simple data retrieval tool for URIs.
 
 ![NinjaUri](docs/images/ninjauri.gif "Screencast of NinjaUri")
 
-## Overview:
+
+
+## Overview
 
 NinjaUri uses `pythonwhois-alt` (https://github.com/kilgoretrout1985/pythonwhois-alt) and `tldextract` (https://github.com/john-kurkowski/tldextract) to extract a series of information from a given URI.
 
 
-## Installation:
+
+## Installation
+
 The first step is cloning the NinjaUri repository, or downloading its source code.
 
 ```
@@ -25,7 +29,7 @@ $ cd NinjaUri
 
 NinjaUri has two ways to be executed, in local environment or in Docker.
 
-### Locally:
+### Local
 To execute NinjaUri in your local machine, you need `Python 3.6` or higher installed.
 Just launch the following commands, which will install all the needed Python dependencies and add a `ninjauri` symlink to `/usr/local/bin/`.
 
@@ -35,7 +39,7 @@ $ make install
 $ ninjauri --help
 ```
 
-### Docker:
+### Docker
 To execute NinjaUri in Docker, you need `Docker` installed.
 To build the Docker image, launch the following commands:
 
@@ -45,10 +49,12 @@ $ docker run --name ninjauri -it --rm ninjauri:latest ninjauri --help
 ```
 
 
-## Run checkstyle:
+
+## Checkstyle
+
 Once you've configured it (see the _"Installation"_ section), you can also run NinjaUri checkstyle as follows.
 
-### Locally:
+### Local
 To run the checkstyle in your local machine, launch the following command:
 ```
 $ make checkstyle
@@ -60,17 +66,19 @@ You can also run the checkstyle automatically at every git commit by launching t
 $ make install-githooks
 ```
 
-### Docker:
+### Docker
 To run the checkstyle in Docker, launch the following command:
 ```
 $ make checkstyle-docker
 ```
 
 
-## Run tests:
+
+## Tests
+
 Once you've configured it (see the _"Installation"_ section), you can also run NinjaUri tests as follows.
 
-### Locally:
+### Local
 To run the tests in your local machine, launch the following command:
 ```
 $ make test
@@ -81,11 +89,12 @@ You can also run the tests with coverage by launching the following command:
 $ make test-coverage
 ```
 
-### Docker:
+### Docker
 To run the tests in Docker, launch the following command:
 ```
 $ make test-docker
 ```
+
 
 
 ## Usage
@@ -177,6 +186,7 @@ $ ninjauri https://en.wikipedia.org/wiki/URI --json
 ```
 
 
-## Licence:
+
+## Licence
 
 NinjaUri is licensed under the GNU General Public License v3.0 (http://www.gnu.org/licenses/gpl-3.0.html).
