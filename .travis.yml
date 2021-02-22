@@ -13,8 +13,8 @@ jobs:
       after_success: # NOTE: needed to override the generic "after_success" section (i.e. coveralls report)
         - docker ps -a
     # Linux: checkstyle and tests (with coverage)
-    - name: "Python 3.5"
-      python: 3.5
+    - name: "Python 3.6"
+      python: 3.6
     - name: "Python 3.8"
       python: 3.8
 install:
