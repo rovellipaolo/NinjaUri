@@ -4,6 +4,9 @@ from ninjauri import parse_whois
 
 
 class TestParseWhois(unittest.TestCase):
+    """
+    Test parse_whois method.
+    """
 
     ANY_DOMAIN = "wikipedia.org"
     ANY_WHOIS_SERVER = "whois.pir.org"

@@ -1,12 +1,16 @@
 from argparse import Namespace
-from pythonwhois.shared import WhoisException
 import unittest
 from unittest.mock import patch
+from pythonwhois.shared import WhoisException
 
 from ninjauri import main
 
 
+# pylint: disable=too-many-arguments
 class TestMain(unittest.TestCase):
+    """
+    Test main method.
+    """
 
     ANY_RAW_URI = "https://en.wikipedia.org/wiki/URI"
     ANY_URI = {

@@ -3,7 +3,10 @@ import unittest
 from ninjauri import get_domain
 
 
-class TestParseDomain(unittest.TestCase):
+class TestGetDomain(unittest.TestCase):
+    """
+    Test get_domain method.
+    """
 
     def test_get_domain(self):
         result = get_domain("wikipedia.org")

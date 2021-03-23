@@ -50,7 +50,7 @@ test:
 
 .PHONY: test-coverage
 test-coverage:
-	@coverage3 run --source=. -m unittest
+	@coverage3 run --source=. --omit="tests/*" -m unittest
 	@coverage3 report
 
 .PHONY: test-docker
@@ -59,7 +59,7 @@ test-docker:
 
 .PHONY: checkstyle
 checkstyle:
-	pylint ninjauri.py
+	pylint ninjauri.py tests/
 
 .PHONY: checkstyle-docker
 checkstyle-docker:

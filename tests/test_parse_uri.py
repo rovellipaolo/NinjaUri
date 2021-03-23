@@ -5,7 +5,10 @@ from datetime import datetime
 from ninjauri import parse_uri
 
 
-class TestParseWhois(unittest.TestCase):
+class TestParseUri(unittest.TestCase):
+    """
+    Test parse_uri method.
+    """
 
     ANY_RAW_URI = "https://en.wikipedia.org/wiki/URI"
 

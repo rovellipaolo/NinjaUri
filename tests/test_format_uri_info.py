@@ -4,7 +4,11 @@ from parameterized import parameterized
 from ninjauri import format_uri_info
 
 
+# pylint: disable=too-many-arguments
 class TestFormatUriInfo(unittest.TestCase):
+    """
+    Test format_uri_info method.
+    """
 
     @parameterized.expand([
         [None, None, 0, "- None"],

@@ -5,6 +5,9 @@ from ninjauri import get_whois
 
 
 class TestGetWhois(unittest.TestCase):
+    """
+    Test get_whois method.
+    """
 
     ANY_DOMAIN = "wikipedia.org"
     ANY_RAW_INFO = "any whois info"

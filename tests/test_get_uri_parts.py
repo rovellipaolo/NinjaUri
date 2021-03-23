@@ -3,7 +3,10 @@ import unittest
 from ninjauri import get_uri_parts
 
 
-class TestParseUriParts(unittest.TestCase):
+class TestGetUriParts(unittest.TestCase):
+    """
+    Test get_uri_parts method.
+    """
 
     def test_get_uri_hostname(self):
         result = get_uri_parts("en.wikipedia.org")

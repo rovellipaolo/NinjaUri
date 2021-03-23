@@ -5,6 +5,9 @@ from ninjauri import print_uri
 
 
 class TestPrintUri(unittest.TestCase):
+    """
+    Test print_uri method.
+    """
 
     ANY_RAW_URI = "https://en.wikipedia.org/wiki/URI"
     ANY_URI = {
