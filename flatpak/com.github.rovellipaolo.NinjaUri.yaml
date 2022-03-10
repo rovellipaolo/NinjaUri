@@ -1,0 +1,45 @@
+app-id: org.paolorovelli.NinjaUri
+runtime: org.freedesktop.Platform
+runtime-version: "20.08"
+sdk: org.freedesktop.Sdk
+command: ninjauri
+finish-args:
+  - --share=network
+modules:
+  - name: python3
+    sources:
+      - type: archive
+        url: https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tar.xz
+        sha256: e3003ed57db17e617acb382b0cade29a248c6026b1bd8aad1f976e9af66a83b0
+  - name: ninjauri
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+    build-commands:
+      - mkdir /app/NinjaUri
+      - cp ninjauri.py /app/NinjaUri/ninjauri.py
+      - pip3 install -r requirements/prod.txt
+      - ln -s /app/NinjaUri/ninjauri.py /app/bin/ninjauri
+    sources:
+      # Build against remote source code:
+      # - type: archive
+      #   url: https://github.com/rovellipaolo/NinjaUri/archive/master.tar.gz
+      #   sha256: a61e745aa366ba0ff51cc428614dbf4969de31b95d8ec585a73d1c4761a7aeb2
+      # Build against local source code:
+      - type: dir
+        path: ../
+    cleanup:
+      - /app/NinjaUri/docs
+      - /app/NinjaUri/README.md
+      - /app/NinjaUri/requirements
+      - /app/NinjaUri/requirements.txt
+      - /app/NinjaUri/docker
+      - /app/NinjaUri/flatpak
+      - /app/NinjaUri/snap
+      - /app/NinjaUri/tests
+      - /app/NinjaUri/Makefile
+      - /app/NinjaUri/.github
+      - /app/NinjaUri/.gitignore
+      - /app/NinjaUri/.pylintrc
+      - /app/NinjaUri/.pre-commit-config.yaml

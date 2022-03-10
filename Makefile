@@ -1,6 +1,7 @@
 DOCKER_FILE :=  docker/Dockerfile
 DOCKER_IMAGE := ninjauri
 DOCKER_TAG := latest
+FLATPAK_MANIFEST := flatpak/com.github.rovellipaolo.NinjaUri.yaml
 PWD := $(shell pwd)
 NINJAURI_HOME := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
@@ -13,6 +14,11 @@ build:
 .PHONY: build-docker
 build-docker:
 	@docker build -f ${DOCKER_FILE} -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+
+.PHONY: build-flatpak
+build-flatpak:
+	@flatpak install flathub org.freedesktop.Platform//20.08 org.freedesktop.Sdk//20.08 --user
+	@flatpak-builder flatpak/build ${FLATPAK_MANIFEST} --force-clean
 
 
 # Install:
@@ -42,6 +48,10 @@ run:
 .PHONY: run-docker
 run-docker:
 	@docker run --name ${DOCKER_IMAGE} -it --rm ${DOCKER_IMAGE}:${DOCKER_TAG} ninjauri $(uri) --json
+
+.PHONY: run-flatpak
+run-flatpak:
+	@flatpak-builder --run flatpak/build ${FLATPAK_MANIFEST} ninjauri $(uri)
 
 
 # Test:

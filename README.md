@@ -27,9 +27,9 @@ $ git clone https://github.com/rovellipaolo/NinjaUri
 $ cd NinjaUri
 ```
 
-NinjaUri has two ways to be executed, in local environment or in Docker.
+NinjaUri has several ways to be executed: natively in your local environment, in [Docker](https://www.docker.com/) and as a [Flatpak](https://flatpak.org/).
 
-### Local
+### Native
 To execute NinjaUri in your local machine, you need `Python 3.6` or higher installed.
 Just launch the following commands, which will install all the needed Python dependencies and add a `ninjauri` symlink to `/usr/local/bin/`.
 
@@ -48,13 +48,21 @@ $ make build-docker
 $ docker run --name ninjauri -it --rm ninjauri:latest ninjauri --help
 ```
 
+### Flatpak
+To execute NinjaUri as a Flatpak, you need `Flatpak` and `flatpak-builder` installed.
+Just launch the following commands, which will install all the needed Flatpak dependencies:
+```shell
+$ make build-flatpak
+$ flatpak-builder --run flatpak/build flatpak/com.github.rovellipaolo.NinjaUri.yaml ninjauri --help
+```
+
 
 
 ## Checkstyle
 
 Once you've configured it (see the _"Installation"_ section), you can also run NinjaUri checkstyle as follows.
 
-### Local
+### Native
 To run the checkstyle in your local machine, launch the following command:
 ```
 $ make checkstyle
@@ -78,7 +86,7 @@ $ make checkstyle-docker
 
 Once you've configured it (see the _"Installation"_ section), you can also run NinjaUri tests as follows.
 
-### Local
+### Native
 To run the tests in your local machine, launch the following command:
 ```
 $ make test
