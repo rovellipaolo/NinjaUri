@@ -27,7 +27,7 @@ $ git clone https://github.com/rovellipaolo/NinjaUri
 $ cd NinjaUri
 ```
 
-NinjaUri has several ways to be executed: natively in your local environment, in [Docker](https://www.docker.com/) and as a [Flatpak](https://flatpak.org/).
+NinjaUri has several ways to be executed: natively in your local environment, in [Docker](https://www.docker.com/), as a [Flatpak](https://flatpak.org/) and as a [Snap](https://snapcraft.io/).
 
 ### Native
 To execute NinjaUri in your local machine, you need `Python 3.6` or higher installed.
@@ -54,6 +54,15 @@ Just launch the following commands, which will install all the needed Flatpak de
 ```shell
 $ make build-flatpak
 $ flatpak-builder --run flatpak/build flatpak/com.github.rovellipaolo.NinjaUri.yaml ninjauri --help
+```
+
+### Snap
+To execute NinjaUri as a Snap, you need `Snap` and `snapcraft` installed.
+Just launch the following commands, which will install all the needed Snap dependencies:
+```shell
+$ make build-snap
+$ make install-snap
+$ ninjauri --help
 ```
 
 

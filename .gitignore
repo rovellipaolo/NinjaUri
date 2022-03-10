@@ -5,3 +5,4 @@ __pycache__
 .idea/*
 flatpak/build/*
 .flatpak-builder/*
+ninjauri_*.snap

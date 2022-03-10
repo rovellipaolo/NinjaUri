@@ -20,6 +20,13 @@ build-flatpak:
 	@flatpak install flathub org.freedesktop.Platform//20.08 org.freedesktop.Sdk//20.08 --user
 	@flatpak-builder flatpak/build ${FLATPAK_MANIFEST} --force-clean
 
+.PHONY: build-snap
+build-snap:
+	find . | grep -E "(__pycache__|\.pyc|\.pyo$$)" | xargs rm -rf
+	rm -f ninjauri_*.snap
+	@snapcraft clean
+	@snapcraft
+
 
 # Install:
 .PHONY: install
@@ -29,6 +36,14 @@ install:
 .PHONY: uninstall
 uninstall:
 	sudo unlink /usr/local/bin/ninjauri
+
+.PHONY: install-snap
+install-snap:
+	snap install ninjauri_2.0_amd64.snap --devmode
+
+.PHONY: uninstall-snap
+uninstall-snap:
+	snap remove ninjauri
 
 .PHONY: install-githooks
 install-githooks:

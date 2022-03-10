@@ -1,0 +1,35 @@
+name: ninjauri
+base: core18
+version: '2.0'
+summary: A simple data retrieval tool for URIs
+description: |
+  NinjaUri is a simple data retrieval tool for URIs.
+
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+grade: stable
+confinement: strict
+
+parts:
+  dependencies:
+    plugin: python
+    python-version: python3
+    requirements:
+      - "requirements/prod.txt"
+    source: .
+  ninjauri:
+    after:
+      - dependencies
+    plugin: nil
+    source: .
+    override-build: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      cp -av ninjauri.py $SNAPCRAFT_PART_INSTALL/bin/ninjauri.py
+
+apps:
+  ninjauri:
+    command: usr/bin/python3 $SNAP/bin/ninjauri.py
+    plugs:
+      - network
