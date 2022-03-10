@@ -1,3 +1,4 @@
+DOCKER_FILE :=  docker/Dockerfile
 DOCKER_IMAGE := ninjauri
 DOCKER_TAG := latest
 PWD := $(shell pwd)
@@ -11,7 +12,7 @@ build:
 
 .PHONY: build-docker
 build-docker:
-	@docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+	@docker build -f ${DOCKER_FILE} -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
 
 
 # Install:
