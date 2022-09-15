@@ -31,7 +31,7 @@ build-snap:
 # Install:
 .PHONY: install
 install:
-	sudo ln -s $(NINJAURI_HOME)/ninjauri.py /usr/local/bin/ninjauri
+	sudo ln -s ${NINJAURI_HOME}/ninjauri.py /usr/local/bin/ninjauri
 
 .PHONY: uninstall
 uninstall:
