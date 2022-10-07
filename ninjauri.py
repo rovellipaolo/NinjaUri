@@ -190,7 +190,7 @@ def format_uri_info(key: Optional[str], value: Optional[Any], depth: int = 0) ->
         if value is None:
             output = key
         else:
-            output = "{0:12} {1}".format(key, value)
+            output = "{0:12} {1}".format(key, value)  # pylint: disable=consider-using-f-string
     return output
 
 
