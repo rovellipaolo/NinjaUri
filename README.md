@@ -32,7 +32,7 @@ $ cd NinjaUri
 NinjaUri has several ways to be executed: natively in your local environment, in [Docker](https://www.docker.com/), as a [Flatpak](https://flatpak.org/) and as a [Snap](https://snapcraft.io/).
 
 ### Native
-To execute NinjaUri in your local machine, you need `Python 3.6` or higher installed.
+To execute NinjaUri in your local machine, you need `Python 3.8` or higher installed.
 Just launch the following commands, which will install all the needed Python dependencies and add a `ninjauri` symlink to `/usr/local/bin/`.
 
 ```
