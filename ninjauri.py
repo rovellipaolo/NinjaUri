@@ -134,7 +134,7 @@ def parse_whois_dates(uri: Dict, whois: Dict):
 
 
 def parse_whois_servers(uri: Dict, whois: Dict):
-    uri["nameservers"] = whois["nameservers"] if "nameservers" in whois else[]
+    uri["nameservers"] = whois["nameservers"] if "nameservers" in whois else []
     if "whois_server" in whois and len(whois["whois_server"]) > 0:
         uri["whois"]["servers"].insert(0, whois["whois_server"][0])
 

@@ -1,4 +1,5 @@
 -r prod.txt
 coverage==6.*
 parameterized==0.*
+pycodestyle==2.*
 pylint==2.*

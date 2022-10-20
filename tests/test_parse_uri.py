@@ -41,7 +41,7 @@ class TestParseUri(unittest.TestCase):
         DNSSEC: unsigned
         URL of the ICANN Whois Inaccuracy Complaint Form https://www.icann.org/wicf/)
         >>> Last update of WHOIS database: 2020-05-28T14:27:51Z <<<
-        
+
         For more information on Whois status codes, please visit https://icann.org/epp""" % {
         "registrar_server": ANY_WHOIS_REGISTRAR_SERVER,
         "registrar_email": ANY_WHOIS_REGISTRAR_EMAIL

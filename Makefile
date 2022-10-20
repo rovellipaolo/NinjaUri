@@ -89,8 +89,9 @@ test-docker:
 
 .PHONY: checkstyle
 checkstyle:
+	pycodestyle --max-line-length=120 ninjauri.py tests/
 	pylint ninjauri.py tests/
 
 .PHONY: checkstyle-docker
 checkstyle-docker:
-	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri -v ${NINJAURI_HOME}/.pylintrc:/opt/NinjaUri/.pylintrc ${DOCKER_IMAGE}:${DOCKER_TAG} pylint ninjauri.py
+	@docker run --name ${DOCKER_IMAGE} --rm -w /opt/NinjaUri -v ${NINJAURI_HOME}/.pylintrc:/opt/NinjaUri/.pylintrc ${DOCKER_IMAGE}:${DOCKER_TAG} pycodestyle --max-line-length=120 ninjauri.py && pylint ninjauri.py
