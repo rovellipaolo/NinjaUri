@@ -5,7 +5,6 @@ NinjaUri is a simple data retrieval tool for URIs.
 
 [![Build Status: GitHub Actions](https://github.com/rovellipaolo/NinjaUri/actions/workflows/ci.yml/badge.svg)](https://github.com/rovellipaolo/NinjaUri/actions)
 [![Test Coverage: Coveralls](https://coveralls.io/repos/github/rovellipaolo/NinjaUri/badge.svg)](https://coveralls.io/github/rovellipaolo/NinjaUri)
-[![Language Grade: LGTM.com](https://img.shields.io/lgtm/grade/python/g/rovellipaolo/NinjaUri.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/rovellipaolo/NinjaUri/context:python)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/ninjauri)
