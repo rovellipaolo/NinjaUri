@@ -114,7 +114,7 @@ def parse_whois(uri: Dict):
     logger.debug(f"Whois info:\n{whois}")
     uri["domain_id"] = whois["id"][0] if "id" in whois and len(whois["id"]) > 0 else ""
     uri["status"] = whois["status"] if "status" in whois else []
-    if "registrar" in whois is not None and len(whois["registrar"]) > 0:
+    if "registrar" in whois and len(whois["registrar"]) > 0:
         uri["registrar"] = whois["registrar"][0]
     else:
         uri["registrar"] = ""
