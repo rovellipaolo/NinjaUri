@@ -9,7 +9,8 @@ NINJAURI_HOME := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 # Build:
 .PHONY: build
 build:
-	@pip3 install -r requirements.txt
+	@which pipenv || pip3 install pipenv
+	@pipenv install --dev
 
 .PHONY: build-docker
 build-docker:
@@ -24,6 +25,7 @@ build-flatpak:
 build-snap:
 	find . | grep -E "(__pycache__|\.pyc|\.pyo$$)" | xargs rm -rf
 	rm -f ninjauri_*.snap
+	@pipenv requirements > requirements.txt
 	@snapcraft clean
 	@snapcraft
 
@@ -62,7 +64,7 @@ uninstall-githooks:
 # Run:
 .PHONY: run
 run:
-	@python3 ninjauri.py $(uri)
+	@pipenv run python3 ninjauri.py $(uri)
 
 .PHONY: run-docker
 run-docker:
@@ -76,12 +78,12 @@ run-flatpak:
 # Test:
 .PHONY: test
 test:
-	@python3 -m unittest
+	@pipenv run python3 -m unittest
 
 .PHONY: test-coverage
 test-coverage:
-	@coverage3 run --source=. --omit="tests/*" -m unittest
-	@coverage3 report
+	@pipenv run coverage3 run --source=. --omit="tests/*" -m unittest
+	@pipenv run coverage3 report
 
 .PHONY: test-docker
 test-docker:
@@ -89,8 +91,8 @@ test-docker:
 
 .PHONY: checkstyle
 checkstyle:
-	pycodestyle --max-line-length=120 ninjauri.py tests/
-	pylint ninjauri.py tests/
+	@pipenv run pycodestyle --max-line-length=120 ninjauri.py tests/
+	@pipenv run pylint ninjauri.py tests/
 
 .PHONY: checkstyle-docker
 checkstyle-docker:

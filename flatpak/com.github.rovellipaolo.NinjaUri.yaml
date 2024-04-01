@@ -19,7 +19,8 @@ modules:
     build-commands:
       - mkdir /app/NinjaUri
       - cp ninjauri.py /app/NinjaUri/ninjauri.py
-      - pip3 install -r requirements/prod.txt
+      - pip3 install pipenv
+      - pipenv install --system --deploy
       - ln -s /app/NinjaUri/ninjauri.py /app/bin/ninjauri
     sources:
       # Build against remote source code:
@@ -32,8 +33,8 @@ modules:
     cleanup:
       - /app/NinjaUri/docs
       - /app/NinjaUri/README.md
-      - /app/NinjaUri/requirements
-      - /app/NinjaUri/requirements.txt
+      - /app/NinjaUri/Pipfile
+      - /app/NinjaUri/Pipfile.lock
       - /app/NinjaUri/docker
       - /app/NinjaUri/flatpak
       - /app/NinjaUri/snap

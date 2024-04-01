@@ -17,7 +17,7 @@ parts:
     plugin: python
     python-version: python3
     requirements:
-      - "requirements/prod.txt"
+      - "requirements.txt"
     source: .
   ninjauri:
     after:
