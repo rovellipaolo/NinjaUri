@@ -1,2 +1,2 @@
 pythonwhois-alt==2.*
-tldextract==3.*
+tldextract==5.*
