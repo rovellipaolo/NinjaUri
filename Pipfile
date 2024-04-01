@@ -9,6 +9,7 @@ tldextract = "==5.*"
 
 [dev-packages]
 coverage = "==7.*"
+dill = "*"
 parameterized = "==0.9.*"
 pycodestyle = "==2.*"
 pylint = "==3.*"
