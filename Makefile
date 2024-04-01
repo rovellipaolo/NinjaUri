@@ -25,7 +25,6 @@ build-flatpak:
 build-snap:
 	find . | grep -E "(__pycache__|\.pyc|\.pyo$$)" | xargs rm -rf
 	rm -f ninjauri_*.snap
-	@pipenv requirements > requirements.txt
 	@snapcraft clean
 	@snapcraft
 
@@ -45,7 +44,7 @@ uninstall:
 
 .PHONY: install-snap
 install-snap:
-	snap install ninjauri_2.0_amd64.snap --devmode
+	snap install ninjauri_2.0.1_amd64.snap --devmode
 
 .PHONY: uninstall-snap
 uninstall-snap:
