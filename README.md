@@ -24,7 +24,7 @@ NinjaUri uses `pythonwhois-alt` (https://github.com/kilgoretrout1985/pythonwhois
 
 
 
-## Installation
+## Build
 
 The first step is cloning the NinjaUri repository, or downloading its source code.
 
@@ -72,39 +72,15 @@ $ ninjauri --help
 ```
 
 
+## Test
 
-## Checkstyle
-
-Once you've configured it (see the _"Installation"_ section), you can also run NinjaUri checkstyle as follows.
-
-### Native
-To run the checkstyle in your local machine, launch the following command:
-```
-$ make checkstyle
-```
-**NOTE:** This is using [`pylint`](https://github.com/PyCQA/pylint) under-the-hood.
-
-You can also run the checkstyle automatically at every git commit by launching the following command:
-```
-$ make install-githooks
-```
-
-### Docker
-To run the checkstyle in Docker, launch the following command:
-```
-$ make checkstyle-docker
-```
-
-
-
-## Tests
-
-Once you've configured it (see the _"Installation"_ section), you can also run NinjaUri tests as follows.
+Once you've configured it (see the _"Installation"_ section), you can also run the tests and checkstyle as follows.
 
 ### Native
-To run the tests in your local machine, launch the following command:
+To run them in your local machine, launch the following command:
 ```
 $ make test
+$ make checkstyle
 ```
 
 You can also run the tests with coverage by launching the following command:
@@ -112,10 +88,16 @@ You can also run the tests with coverage by launching the following command:
 $ make test-coverage
 ```
 
+And/or configure the checkstyle to run automatically at every git commit by launching the following command:
+```
+$ make install-githooks
+```
+
 ### Docker
-To run the tests in Docker, launch the following command:
+To run them in Docker, launch the following command:
 ```
 $ make test-docker
+$ make checkstyle-docker
 ```
 
 
