@@ -72,6 +72,7 @@ $ ninjauri --help
 ```
 
 
+
 ## Test
 
 Once you've configured it (see the _"Installation"_ section), you can also run the tests and checkstyle as follows.
