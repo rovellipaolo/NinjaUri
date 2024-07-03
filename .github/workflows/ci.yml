@@ -32,7 +32,7 @@ jobs:
         if: ${{ matrix.python-version != '3.10' }}
         run: |
           make checkstyle
-      - name: Tests
+      - name: Test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -50,11 +50,11 @@ jobs:
           indicators: true
           output: both
           thresholds: "50 75"
-      - name: Add coverage report to GitHub (Linux only)
+      - name: Show coverage report in GitHub Actions summary (Linux only)
         if: ${{ matrix.os == 'ubuntu-latest' && hashFiles('code-coverage-results.md') != '' }}
         run: |
           cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
-      - name: Add coverage report to GitHub (macOS fallback)
+      - name: Show coverage report in GitHub Actions summary (macOS fallback)
         if: ${{ matrix.os == 'macos-latest' && hashFiles('.coverage') != '' }}
         run: |
           echo "$(coverage3 report --data-file=".coverage" --show-missing)" >> $GITHUB_STEP_SUMMARY
