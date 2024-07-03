@@ -38,8 +38,8 @@ jobs:
         run: |
           make test-coverage
           coveralls --service=github
-      - name: Build coverage report
-        if: ${{ hashFiles('coverage.xml') != '' }}
+      - name: Build coverage report (Linux only)
+        if: ${{ matrix.os == 'ubuntu-latest' && hashFiles('coverage.xml') != '' }}
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
           filename: coverage.xml
@@ -50,7 +50,11 @@ jobs:
           indicators: true
           output: both
           thresholds: "50 75"
-      - name: Add coverage report to GitHub
-        if: ${{ hashFiles('code-coverage-results.md') != '' }}
+      - name: Add coverage report to GitHub (Linux only)
+        if: ${{ matrix.os == 'ubuntu-latest' && hashFiles('code-coverage-results.md') != '' }}
         run: |
           cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+      - name: Add coverage report to GitHub (macOS fallback)
+        if: ${{ matrix.os == 'macos-latest' && hashFiles('.coverage') != '' }}
+        run: |
+          echo "$(coverage3 report --data-file=".coverage" --show-missing)" >> $GITHUB_STEP_SUMMARY
