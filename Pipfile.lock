@@ -129,11 +129,12 @@
         },
         "filelock": {
             "hashes": [
-                "sha256:5ffa845303983e7a0b7ae17636509bc97997d58afeafa72fb141a17b152284cb",
-                "sha256:a79895a25bbefdf55d1a2a0a80968f7dbb28edcd6d4234a0afb3f37ecde4b546"
+                "sha256:15d9e9a67306188a44baa72f569d2bfd803076269365fdea0934385da4dc361a",
+                "sha256:b8360948b351b80f420878d8516519a2204b07aefcdcfd24912a5d33127f188c"
             ],
-            "markers": "python_version >= '3.8'",
-            "version": "==3.13.3"
+            "index": "pypi",
+            "markers": "python_version >= '3.10'",
+            "version": "==3.20.1"
         },
         "idna": {
             "hashes": [
